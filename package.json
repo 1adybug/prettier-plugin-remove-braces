@@ -1,5 +1,5 @@
 {
-    "name": "prettier-plugin-remove-braces",
+    "name": "@1adybug/prettier-plugin-remove-braces",
     "version": "0.0.1",
     "description": "A Prettier plugin that removes unnecessary braces in JavaScript/TypeScript code",
     "main": "dist/index.js",
