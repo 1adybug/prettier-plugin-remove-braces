@@ -1,11 +1,15 @@
 # Prettier Plugin - Remove Braces
 
+[中文文档](https://github.com/1adybug/prettier-plugin-remove-braces/blob/main/README.zh-CN.md)
+
+> **Note**: This plugin was completely developed by Claude Code + GLM-4.6
+
 A Prettier plugin that automatically removes unnecessary braces from JavaScript/TypeScript code to achieve a more concise style, similar to ESLint's `arrow-body-style: as-needed` but with broader scope.
 
 ## Features
 
 - ✅ **Arrow Functions**: Converts `() => { return x; }` to `() => x`
-- ✅ **Object Literal Returns**: Properly wraps returned objects: `() => { return { a: 1 }; }` → `() => ({ a: 1 })`
+- ✅ **Object Literal Returns**: Properly wraps returned objects: `() => { return { a: 1 }; }` → `**() => ({ a: 1 })`
 - ✅ **If Statements**: Removes braces from single-statement blocks: `if (cond) { stmt(); }` → `if (cond) stmt();`
 - ✅ **Loops**: Supports `for`, `while`, `do-while`, `for-in`, and `for-of` loops
 - ✅ **Safety Checks**: Preserves braces when necessary for syntax correctness
@@ -37,6 +41,7 @@ Add the plugin to your Prettier configuration:
 ```js
 module.exports = {
     plugins: ["prettier-plugin-remove-braces"],
+    controlStatementBraces: "remove", // Options: "default" | "remove" | "add"
     // ... your other prettier options
 }
 ```
@@ -45,7 +50,8 @@ module.exports = {
 
 ```json
 {
-    "plugins": ["prettier-plugin-remove-braces"]
+    "plugins": ["prettier-plugin-remove-braces"],
+    "controlStatementBraces": "remove"
 }
 ```
 
@@ -77,27 +83,16 @@ Add to your `.vscode/settings.json`:
 
 ```javascript
 // Before
-const add = (a, b) => {
-    return a + b
-}
+const add = (a, b) => a + b
 
-const getObject = () => {
-    return { key: "value" }
-}
+const getObject = () => ({ key: "value" })
 
-if (condition) {
-    doSomething()
-} else {
-    doSomethingElse()
-}
+if (condition) doSomething()
+else doSomethingElse()
 
-for (let i = 0; i < 10; i++) {
-    console.log(i)
-}
+for (let i = 0; i < 10; i++) console.log(i)
 
-while (true) {
-    break
-}
+while (true) break
 
 // After
 const add = (a, b) => a + b
@@ -129,10 +124,57 @@ if (condition) {
 // Braces kept - dangling else prevention
 if (a) {
     if (b) foo()
-} else {
-    bar()
-}
+} else bar()
 ```
+
+## Options
+
+### `controlStatementBraces` (choice, default: "default")
+
+Control how braces are handled around single control statements (if, for, while, try, etc.).
+
+#### Options
+
+- **"default"** - Keep original formatting - don't add or remove braces around control statements
+- **"remove"** - Remove braces around single control statements when possible
+- **"add"** - Add braces around control statements that don't have them
+
+#### Examples
+
+**"remove" mode:**
+
+```javascript
+// Before
+if (condition0) if (condition1) doSomething()
+
+if (condition) for (let i = 0; i < 10; i++) console.log(i)
+
+// After
+if (condition0) if (condition1) doSomething()
+
+if (condition) for (let i = 0; i < 10; i++) console.log(i)
+```
+
+**"add" mode:**
+
+```javascript
+// Before
+if (condition) if (condition1) doSomething()
+
+if (condition) for (let i = 0; i < 10; i++) console.log(i)
+
+// After
+if (condition) if (condition1) doSomething()
+
+if (condition) for (let i = 0; i < 10; i++) console.log(i)
+```
+
+**Safety Rules Still Apply:**
+
+- Braces are preserved with multiple statements
+- Braces are preserved with lexical declarations (`const`, `let`, function, class)
+- Braces are preserved with comments
+- Dangling else prevention is still respected
 
 ## Compatibility
 
