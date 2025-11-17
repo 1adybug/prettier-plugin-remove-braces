@@ -24,8 +24,16 @@
     "author": "",
     "license": "MIT",
     "type": "module",
-    "peerDependencies": {
-        "prettier": "^2.0.0 || ^3.0.0"
+    "files": [
+        "dist/"
+    ],
+    "publishConfig": {
+        "access": "public",
+        "registry": "https://registry.npmjs.com/"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/1adybug/prettier-plugin-remove-braces.git"
     },
     "dependencies": {},
     "devDependencies": {
@@ -37,10 +45,7 @@
         "prettier-plugin-block-padding": "^0.0.9",
         "typescript": "^5.8.3"
     },
-    "files": [
-        "dist/"
-    ],
-    "engines": {
-        "node": ">=14.0.0"
+    "peerDependencies": {
+        "prettier": ">= 3"
     }
 }
