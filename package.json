@@ -1,6 +1,6 @@
 {
     "name": "prettier-plugin-remove-braces",
-    "version": "1.0.0",
+    "version": "0.0.1",
     "description": "A Prettier plugin that removes unnecessary braces in JavaScript/TypeScript code",
     "main": "dist/index.js",
     "types": "dist/index.d.ts",
