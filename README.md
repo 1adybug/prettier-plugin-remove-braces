@@ -9,7 +9,7 @@ A Prettier plugin that automatically removes unnecessary braces from JavaScript/
 ## Features
 
 - ✅ **Arrow Functions**: Converts `() => { return x; }` to `() => x`
-- ✅ **Object Literal Returns**: Properly wraps returned objects: `() => { return { a: 1 }; }` → `**() => ({ a: 1 })`
+- ✅ **Object Literal Returns**: Properly wraps returned objects: `() => { return { a: 1 }; }` → `() => ({ a: 1 })`
 - ✅ **If Statements**: Removes braces from single-statement blocks: `if (cond) { stmt(); }` → `if (cond) stmt();`
 - ✅ **Loops**: Supports `for`, `while`, `do-while`, `for-in`, and `for-of` loops
 - ✅ **Safety Checks**: Preserves braces when necessary for syntax correctness
@@ -83,28 +83,39 @@ Add to your `.vscode/settings.json`:
 
 ```javascript
 // Before
-const add = (a, b) => a + b
+const add = (a, b) => {
+    return a + b;
+}
 
-const getObject = () => ({ key: "value" })
+const getObject = () => {
+    return { key: "value" };
+}
 
-if (condition) doSomething()
-else doSomethingElse()
+if (condition) {
+    doSomething();
+} else {
+    doSomethingElse();
+}
 
-for (let i = 0; i < 10; i++) console.log(i)
+for (let i = 0; i < 10; i++) {
+    console.log(i);
+}
 
-while (true) break
+while (true) {
+    break;
+}
 
 // After
-const add = (a, b) => a + b
+const add = (a, b) => a + b;
 
-const getObject = () => ({ key: "value" })
+const getObject = () => ({ key: "value" });
 
-if (condition) doSomething()
-else doSomethingElse()
+if (condition) doSomething();
+else doSomethingElse();
 
-for (let i = 0; i < 10; i++) console.log(i)
+for (let i = 0; i < 10; i++) console.log(i);
 
-while (true) break
+while (true) break;
 ```
 
 ### Cases Where Braces Are Preserved
@@ -145,9 +156,13 @@ Control how braces are handled around single control statements (if, for, while,
 
 ```javascript
 // Before
-if (condition0) if (condition1) doSomething()
+if (condition0) {
+    if (condition1) doSomething()
+}
 
-if (condition) for (let i = 0; i < 10; i++) console.log(i)
+if (condition) {
+    for (let i = 0; i < 10; i++) console.log(i)
+}
 
 // After
 if (condition0) if (condition1) doSomething()
@@ -164,9 +179,13 @@ if (condition) if (condition1) doSomething()
 if (condition) for (let i = 0; i < 10; i++) console.log(i)
 
 // After
-if (condition) if (condition1) doSomething()
+if (condition) {
+    if (condition1) doSomething()
+}
 
-if (condition) for (let i = 0; i < 10; i++) console.log(i)
+if (condition) {
+    for (let i = 0; i < 10; i++) console.log(i)
+}
 ```
 
 **Safety Rules Still Apply:**

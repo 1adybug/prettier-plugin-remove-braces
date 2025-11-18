@@ -83,28 +83,39 @@ npx prettier --write src/index.js
 
 ```javascript
 // 格式化前
-const add = (a, b) => a + b
+const add = (a, b) => {
+    return a + b;
+}
 
-const getObject = () => ({ key: "value" })
+const getObject = () => {
+    return { key: "value" };
+}
 
-if (condition) doSomething()
-else doSomethingElse()
+if (condition) {
+    doSomething();
+} else {
+    doSomethingElse();
+}
 
-for (let i = 0; i < 10; i++) console.log(i)
+for (let i = 0; i < 10; i++) {
+    console.log(i);
+}
 
-while (true) break
+while (true) {
+    break;
+}
 
 // 格式化后
-const add = (a, b) => a + b
+const add = (a, b) => a + b;
 
-const getObject = () => ({ key: "value" })
+const getObject = () => ({ key: "value" });
 
-if (condition) doSomething()
-else doSomethingElse()
+if (condition) doSomething();
+else doSomethingElse();
 
-for (let i = 0; i < 10; i++) console.log(i)
+for (let i = 0; i < 10; i++) console.log(i);
 
-while (true) break
+while (true) break;
 ```
 
 ### 保留大括号的情况
@@ -145,9 +156,13 @@ if (a) {
 
 ```javascript
 // 格式化前
-if (condition0) if (condition1) doSomething()
+if (condition0) {
+    if (condition1) doSomething()
+}
 
-if (condition) for (let i = 0; i < 10; i++) console.log(i)
+if (condition) {
+    for (let i = 0; i < 10; i++) console.log(i)
+}
 
 // 格式化后
 if (condition0) if (condition1) doSomething()
@@ -164,9 +179,13 @@ if (condition) if (condition1) doSomething()
 if (condition) for (let i = 0; i < 10; i++) console.log(i)
 
 // 格式化后
-if (condition) if (condition1) doSomething()
+if (condition) {
+    if (condition1) doSomething()
+}
 
-if (condition) for (let i = 0; i < 10; i++) console.log(i)
+if (condition) {
+    for (let i = 0; i < 10; i++) console.log(i)
+}
 ```
 
 **安全规则依然适用：**
