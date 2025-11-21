@@ -1,6 +1,6 @@
 import { createRequire } from "module"
 
-import { ParserOptions, SupportLanguage } from "prettier"
+import { ParserOptions, Plugin, SupportLanguage } from "prettier"
 
 const require = createRequire(import.meta.url)
 
@@ -173,7 +173,7 @@ function transformAST(ast: any, options: { controlStatementBraces?: "default" | 
 }
 
 // Create the plugin
-export const plugin = {
+export const plugin: Plugin = {
     languages: [
         {
             name: "typescript",
@@ -265,7 +265,7 @@ export const plugin = {
             ],
         },
     },
-}
+} as unknown as Plugin
 
 export { transformAST }
 export default plugin
